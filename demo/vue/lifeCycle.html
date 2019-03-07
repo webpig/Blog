@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>嵌套组件的生命周期</title>
+</head>
+<body>
+    <div id="app">
+        <component-a />
+    </div>   
+
+    <script>
+        Vue.component('component-a', {
+            template: '<div><component-b></component-b></div>',
+            beforeCreate () {
+                console.log('beforeCreate: A');
+            },
+            created() {
+                console.log('created: A');
+            },
+            beforeMount() {
+                console.log('beforeMount: A');
+            },
+            mounted() {
+                console.log('mounted: A');
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate: A');
+            },
+            Update() {
+                console.log('Update: A');
+            },
+            beforeDestroy () {
+                console.log('beforeDestroy: A');
+            },
+            destroyed () {
+                console.log('destroyed: A');
+            }
+        });
+
+        Vue.component('component-b', {
+            template: '<p><component-c></component-c></p>',
+            beforeCreate () {
+                console.log('beforeCreate: B');
+            },
+            created() {
+                console.log('created: B');
+            },
+            beforeMount() {
+                console.log('beforeMount: B');
+            },
+            mounted() {
+                console.log('mounted: B');
+            },
+        });
+
+        Vue.component('component-c', {
+            template: '<span>hello world</span>',
+            beforeCreate () {
+                console.log('beforeCreate: C');
+            },
+            created() {
+                console.log('created: C');
+            },
+            beforeMount() {
+                console.log('beforeMount: C');
+            },
+            mounted() {
+                console.log('mounted: C');
+            },
+        });
+
+        const app = new Vue({
+            el: '#app',
+            beforeCreate () {
+                console.log('beforeCreate: Root');
+            },
+            created() {
+                console.log('created: Root');
+            },
+            beforeMount() {
+                console.log('beforeMount: Root');
+            },
+            mounted() {
+                console.log('mounted: Root');
+            },
+            methods : {
+                handleClick() {
+                    this.$destroy();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
