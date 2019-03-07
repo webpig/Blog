@@ -1,6 +1,6 @@
 ## 嵌套组件的生命周期
 
-问：有A、B、C三个组件，A为B的父组件，B为C的父组件，他们的创建和挂载顺序是怎样的？即（beforeCreate/created，beforeMounte/mounted）的执行顺序。
+问：有A、B、C三个组件，A为B的父组件，B为C的父组件，它们的创建和挂载顺序是怎样的？即（beforeCreate/created，beforeMounte/mounted）的执行顺序。
 
 话不多说，直接上代码：
 
@@ -117,4 +117,4 @@ mounted: Root
 
 ### 总结
 
-父子组件嵌套的生命周期其实都是**先父后子**然后**先子后父**。后续再加入update和destroy的相关代码。
+父子组件嵌套的生命周期其实都是 **先父后子** 然后 **先子后父**。后续再加入update和destroy的相关代码。

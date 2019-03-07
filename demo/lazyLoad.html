@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>懒加载示例</title>
+    <style lang="css">
+        img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+        <img alt="loading" data-src='http://img2.imgtn.bdimg.com/it/u=2275940567,1947516429&fm=26&gp=0.jpg' class='lazy'>
+    </div>
+    <script>    
+        const imgs = document.querySelectorAll('.lazy');
+        const clientHeight = window.innerHeight;
+
+        function throttle(fn, mustRun = 500) {
+            const timer = null;
+            let previous = null;
+
+            return function() {
+                const now = new Date();
+                const context = this;
+                const args = arguments;
+
+                if (!previous){
+                    previous = now;
+                }
+
+                const remaining = now - previous;
+
+                if (mustRun && remaining >= mustRun) {
+                    fn.apply(context, args);
+                    previous = now;
+                }
+            }
+        }
+
+        function lazyLoad () {
+            Array.from(imgs).forEach((img) => {
+                const bound = img.getBoundingClientRect();
+                if (bound.top <= clientHeight) {
+                    if (!img.src) {
+                        img.src = img.dataset.src;
+                    }
+                }
+            });
+        }
+
+        window.onscroll = throttle(lazyLoad);
+    </script>
+</body>
+</html>
