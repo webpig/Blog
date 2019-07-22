@@ -78,18 +78,33 @@
 
 //     return res;
 // }
-function unique (arr) {
-    return arr.sort().reduce((prev, curr) => {
-        if (prev.length === 0 || prev[prev.length - 1] !== curr) {
-            prev.push(curr);
+// function unique (arr) {
+//     return arr.sort().reduce((prev, curr) => {
+//         if (prev.length === 0 || prev[prev.length - 1] !== curr) {
+//             prev.push(curr);
+//         }
+//         return prev;
+//     }, []);
+// }
+
+function findRepeat (arr) {
+    for (let i = 0; i < arr.length; i++) {
+        while (arr[i] !== i) {
+            if (arr[i] === arr[arr[i]]) {
+                return arr[i];
+            }
+            [arr[i], arr[arr[i]]] = [arr[arr[i]], arr[i]];
         }
-        return prev;
-    }, []);
+    }
+
+    return false;
 }
+
+console.log(findRepeat([1, 2, 4, 2]));
 
 // function unique (arr) {
     // return Array.from(new Set(arr));
     // return [...new Set(arr)];
 // }
 
-console.log(unique([1, 1, 0, 2, 2, 3, 1, '1', '1']));
+// console.log(unique([1, 1, 0, 2, 2, 3, 1, '1', '1']));
