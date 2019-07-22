@@ -1,8 +1,4 @@
 Function.prototype.myCall = function (context) {
-    if (typeof this !== 'function') {
-        throw new TypeError('not function')
-    }
-
     context = context || window
     context.fn = this
 
@@ -14,6 +10,26 @@ Function.prototype.myCall = function (context) {
 
     delete context.fn
 
+    return result
+}
+
+Function.prototype.myApply = function (context, arr) {
+    context = context || window
+    context.fn = this
+
+    var result
+
+    if (!arr) {
+        result = context.fn()
+    } else {
+        var args = []
+        for (var i = 0, len = arr.length; i < len; i++) {
+            args.push('arr[' + i + ']')
+        }
+        result = eval('context.fn(' + args + ')')
+    }
+    
+    delete context.fn
     return result
 }
 
@@ -30,5 +46,6 @@ function log (b) {
     }
 }
 
-log.myCall(obj, 2) // 
-log.myCall(null)
+// log.myCall(obj, 2) // 
+// log.myCall(null)
+log.myApply(obj, [2])

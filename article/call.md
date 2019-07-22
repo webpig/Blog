@@ -1,4 +1,4 @@
-## call实现
+## call和apply的实现
 
 借用MDN上的一句话介绍call： 
 
@@ -25,7 +25,7 @@ Function.prototype.myCall = function (context) {
     }
 
     // call方法调用后会有返回结果，这里存储该值，函数通过eval动态调用，因为该参数是字符串
-    var result = eval('context.fn(' + args + ']')
+    var result = eval('context.fn(' + args + ')')
 
     // 删除context.fn，不改变原来的对象，最后返回函数return值
     delete context.fn
@@ -49,4 +49,28 @@ function log (b) {
 
 log.myCall(obj, 2) // 1, 2, 'log'
 log.myCall(null, 2) // 'window' 2 'log'
+```
+
+apply的实现和call类似，这里直接上代码
+
+```js
+Function.prototype.myApply = function (context, arr) {
+    context = context || window
+    context.fn = this
+
+    var result
+
+    if (!arr) {
+        result = context.fn()
+    } else {
+        var args = []
+        for (var i = 0, len = arr.length; i < len; i++) {
+            args.push('arr[' + i + ']')
+        }
+        result = eval('context.fn(' + args + ')')
+    }
+    
+    delete context.fn
+    return result
+}
 ```
