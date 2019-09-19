@@ -1,6 +1,6 @@
-## ES6实现自定义事件
+## ES6实现自定义事件类
 
-自定义事件主要有四个事件，分别为on、once、off、emit。这里我们采用class语法来实现：
+自定义事件类主要有四个方法，分别为on、once、off、emit。这里我们采用class语法来实现：
 
 class结构：
 ```js
