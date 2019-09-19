@@ -8,3 +8,4 @@
 [父子组件嵌套生命周期运行情况](./article/lifeCycle.md)<br>
 [call和apply的实现](./article/call.md)<br>
 [数组去重](./article/arrayUnique.md)<br>
+[ES6实现自定义事件类](./article/eventEmitter.md)<br>
